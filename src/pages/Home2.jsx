@@ -18,7 +18,7 @@ const FILMS = [
     note: 'A hyper-real commercial blending makeup and skincare. Glossy jelly, melting butter and flawless skin close-ups all had to read as photographed.' },
 ];
 
-const CRAFTS = ['Treatment', 'Shot design', 'Storyboard', 'Character', 'World', 'Cinematography', 'Generation', 'Edit', 'Colour', 'Sound', 'Score', 'Voice'];
+const CRAFTS = ['Treatment', 'Shot design', 'Storyboard', 'Character', 'World', 'Cinemato\u00ADgraphy', 'Generation', 'Edit', 'Colour', 'Sound', 'Score', 'Voice'];
 
 const SCOPE = [
   ['Brand films', '$3,000', '1 to 3 minutes', 'Delivered in 15 days'],

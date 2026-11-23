@@ -137,7 +137,7 @@ body.v2 :focus-visible{outline:2px solid var(--tungsten);outline-offset:3px;bord
 .v2 .ruler{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));font-size:12px;color:rgba(147,169,174,.7);padding-bottom:10px;
   background:repeating-linear-gradient(90deg,rgba(147,169,174,.35) 0 1px,transparent 1px calc(100%/48)) bottom/100% 7px no-repeat}
 .v2 .track{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;margin-top:12px}
-.v2 .clip{height:86px;border-radius:5px;background:var(--shadow-3);padding:12px 12px;display:flex;align-items:flex-end;
+.v2 .clip{height:86px;hyphens:manual;overflow-wrap:break-word;border-radius:5px;background:var(--shadow-3);padding:12px 12px;display:flex;align-items:flex-end;
   font-size:14px;line-height:1.2;color:var(--ivory);position:relative;overflow:hidden;
   background-image:repeating-linear-gradient(90deg,rgba(239,230,216,.05) 0 2px,transparent 2px 9px)}
 .v2 .clip.ai{background:var(--tungsten);color:var(--shadow);font-weight:600;background-image:repeating-linear-gradient(90deg,rgba(15,29,35,.1) 0 2px,transparent 2px 9px)}
