@@ -50,17 +50,22 @@ export function Nav2() {
 
 export function Footer2() {
   return (
-    <footer className="foot2">
-      <div className="shell">
-        <div className="foot2-cta">
-          <h2 className="title">Tell us the idea. We build the film.</h2>
-          <div className="cta-stack">
-            <a className="mail" href="mailto:contact@chatturai.com">contact@chatturai.com</a>
-            <p>Or <a className="link" href={CALENDLY} target="_blank" rel="noopener">book a 20 minute call</a> if you already know what you want made.</p>
+    <>
+      <section className="band">
+        <div className="shell">
+          <h2 className="title">Tell us the idea. We build everything after it.</h2>
+          <div className="band-row">
+            <p>Whatever stage it is at, a concept, a script or a rough thought. Write to <a className="mail" href="mailto:contact@chatturai.com">contact@chatturai.com</a> or start here.</p>
+            <div className="btns">
+              <Link className="btn btn-ink" to="/contact">Talk to us</Link>
+              <a className="btn btn-line" href={CALENDLY} target="_blank" rel="noopener">Book a 20 minute call</a>
+            </div>
           </div>
         </div>
-        <div className="foot2-grid">
-          <span>© ChatturAi, cinematic AI films. India, working worldwide.</span>
+      </section>
+      <footer className="foot3">
+        <div className="shell foot3-in">
+          <span>© ChatturAi · Cinematic AI films · India, working worldwide</span>
           <nav aria-label="Footer">
             <Link to="/portfolio">Work</Link>
             <Link to="/about-us">Studio</Link>
@@ -72,7 +77,7 @@ export function Footer2() {
             <Link to="/terms-condition">Terms</Link>
           </nav>
         </div>
-      </div>
-    </footer>
+      </footer>
+    </>
   );
 }
