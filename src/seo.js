@@ -1,7 +1,7 @@
 // Per-page <title>, description and <body> class — copied from the live PHP site.
 export const PAGES = {
   '/': {
-    body: 'p-home',
+    body: 'v2',
     title: 'ChatturAI — Creative Ad-Creation Agency | AI-Powered Ads & Brand Storytelling',
     description:
       'ChatturAI crafts high-impact AI ads, video campaigns, and brand storytelling. From idea to implementation—AI ad videos, creative strategy, and cinematic content that converts.',

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { pageFor } from '../seo';
+import { Nav2, Footer2 } from './Chrome2';
 
 /* ══ NAV + MOBILE MENU (was nav.js) ══ */
 function Nav() {
@@ -143,6 +144,16 @@ function usePageEffects() {
 
 export default function Layout() {
   usePageEffects();
+  const { pathname } = useLocation();
+  if (pageFor(pathname).body === 'v2') {
+    return (
+      <>
+        <Nav2 />
+        <Outlet />
+        <Footer2 />
+      </>
+    );
+  }
   return (
     <>
       <Nav />
