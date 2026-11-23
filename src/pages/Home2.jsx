@@ -19,7 +19,13 @@ const FILMS = [
     note: 'A hyper-realistic cosmetics commercial. Glossy jelly, melting butter and flawless skin close-ups all had to read as photographed.' },
 ];
 
-const STRIP = Array.from({ length: 14 }, (_, i) => `/media/t/t_${i + 1}.png`);
+// light 480px stills straight from Mux (the 1920px posters are too heavy for a moving strip)
+const STRIP = ['u021AiWSBoeL02Do5Cv8dNRcs02dC7j101yj2KAxZrb5TKU', 'jGTKWk00JGBet6qSDJ6BwHS01l00zA8M01jJL9smzjfVmI8', 'YMnBV2OstLZ01MFv0201b8fjKQ7hvIIKX8V1Ka7l00Fbqzg',
+  'eALIA4MM2LVTUiSSU98MZscPR9nnILLoEh8uM02Gw00J00', '9ePbcwpZJGkcscFAVV8EB01fx3aHY8wR01ExJvtYpqiMs', 'vYqkS01I6rmWIqtywzeqj5AYkHZlyg00XrY8GSrd4nnCg',
+  'dwPEyzO01d2gApJEPvQWZtvUt02HvFfDwNCcpYz9WsMSs', 'nNq5wLb00Kb9ihFatUZRG2T02LkAiwf3deENHgo1x8vmA', 'HFjXqbrP00hCuGUnHnIPMV79aCmyKHDJZgg5901uFM8y8',
+  'ofEPmGoMkbhcdRQi1502uT1QF6QphjLPs9j4d8SZlNXA', 'meomhCyllhtuY3xZadHeu7TXu02CpN3vGI4PBPpuKtiw', 'vzEz2d7m02Dlc6EKZhAbXGvgzCRUvAmR00rwJEwFzZU02E',
+  '00V1pk5xxmR502aHfIqVmXWl4hJBMKqMVbri01N3MuATaE', '3b01KEOgIT5dHTFIWw7sbwbuVh8Xow3smVUMFaT4KeXY',
+].map((id) => `https://image.mux.com/${id}/thumbnail.webp?width=480&height=270&fit_mode=smartcrop&time=6`);
 const CRAFTS = ['Treatment', 'Shot design', 'Storyboard', 'Character', 'World', 'Cinemato­graphy', 'Generation', 'Edit', 'Colour', 'Sound', 'Score', 'Voice'];
 const PLANS = [
   { name: 'Brand films', price: '$3,000', items: ['1 to 3 minutes', 'Delivered in 15 days', 'Two revision rounds built in'], hot: true },
