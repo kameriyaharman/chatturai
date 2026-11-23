@@ -28,7 +28,7 @@ export function Nav2() {
           <nav className="nav2-links" aria-label="Main">
             <NavLink to="/portfolio" className={cls}>Work</NavLink>
             <NavLink to="/about-us" className={cls}>Studio</NavLink>
-            <Link className="btn btn-lit" to="/contact">Talk to us</Link>
+            <Link className="btn btn-lime" to="/contact">Talk to us</Link>
           </nav>
           <button className={open ? 'burger2 on' : 'burger2'} aria-label="Menu" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
             <span></span><span></span>

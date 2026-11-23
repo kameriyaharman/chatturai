@@ -84,7 +84,7 @@ function Filmstrip() {
   return (
     <div className="strip" aria-hidden="true">
       <div className="strip-track">
-        {[...STRIP, ...STRIP].map((src, i) => <img key={i} src={src} alt="" loading="lazy" decoding="async" />)}
+        {[...STRIP, ...STRIP].map((src, i) => <img key={i} src={src} alt="" decoding="async" />)}
       </div>
     </div>
   );
