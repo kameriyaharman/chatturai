@@ -6,6 +6,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { handleApi } from './api.mjs';
 
 const ORIGIN = process.env.LEGACY_ORIGIN || 'https://chatturai.com';
 const PORT = process.env.PORT || 3000;
@@ -45,12 +46,17 @@ http.createServer(async (req, res) => {
     const url = new URL(req.url, 'http://x');
     const p = url.pathname.replace(/\/+$/, '') || '/';
 
-    // contact form backend → Yii on the live server (same as .htaccess rule 1)
-    if (p === '/contact' && (req.method === 'POST' || url.searchParams.get('legacy') === '1')) return await proxy(req, res, url);
+    // enquiry API (contact + book-a-call leads, admin panel)
+    if (p.startsWith('/api/')) return await handleApi(req, res, url);
+
+    // form backends → Yii on the live server (same as .htaccess rule 1)
+    if ((p === '/contact' || p === '/book-a-call') && (req.method === 'POST' || url.searchParams.get('legacy') === '1')) return await proxy(req, res, url);
 
     // React pages
     if (p === '/') return sendFile(res, path.join(DIST, 'index.html'));
     if (ROUTES.has(p)) return sendFile(res, path.join(DIST, p.slice(1) + '.html'));
+    if (p === '/book-a-call') return sendFile(res, path.join(DIST, 'book-a-call.html'));
+    if (p === '/admin' || p.startsWith('/admin/')) return sendFile(res, path.join(DIST, 'admin.html'));
 
     // React's own JS bundle
     const file = path.join(DIST, path.normalize(url.pathname));

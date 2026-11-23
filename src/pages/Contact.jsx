@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { COUNTRIES, flag, guessCountry } from '../countries';
 import { CALENDLY } from '../components/Bits';
+import { saveEnquiry } from '../api';
 
 /*
  * The form is still handled by the existing PHP (Yii) backend, exactly as before:
@@ -154,8 +155,19 @@ export default function Contact() {
       return;
     }
     setBusy(true);
+    // save to the enquiry admin (runs alongside the existing Yii submission)
+    const saved = saveEnquiry({
+      source: 'contact',
+      name: values.full_name.trim(), email: values.email.trim(),
+      phone: `${dial} ${values.phone_number.trim()}`,
+      subject: values.subject.trim(), message: values.message.trim(),
+    });
     try {
-      const r = await submitToYii({ ...values, country_code: dial });
+      let r;
+      try { r = await submitToYii({ ...values, country_code: dial }); }
+      catch { r = { ok: false, message: 'Something went wrong. Please try again, or email contact@chatturai.com.' }; }
+      // if Yii is unreachable but the lead is safely stored, still treat it as sent
+      if (!r.ok && !r.fieldErrors && (await saved)) r = { ok: true };
       if (r.ok) {
         setSent(true);
         window.scrollTo({ top: 0, behavior: 'smooth' });

@@ -1,8 +1,9 @@
 # ─────────────────────────────────────────────────────────────
 #  chatturai.com — React front-end + existing Yii (PHP) backend
 #  React serves:  /  /portfolio  /about-us  /contact  /privacy-policy  /terms-condition
-#  PHP still serves everything else: /admin, /book-a-call, /thank-you,
-#  /site/save-booking, and the contact-form submission.
+#            /book-a-call (form step)  /admin (new enquiry admin)
+#  PHP still serves everything else: /booked, /thank-you, /site/save-booking,
+#  /site/meta-track, the Calendly step, and the contact/booking form backends.
 # ─────────────────────────────────────────────────────────────
 
 Options -MultiViews
@@ -11,14 +12,17 @@ DirectoryIndex index.html index.php
 RewriteEngine On
 RewriteBase /
 
-# 1) Contact form → Yii backend (token fetch + submit), same as before
+# 1) Contact / booking forms → Yii backend (token fetch + submit), same as before
 RewriteCond %{REQUEST_METHOD} =POST
-RewriteRule ^contact/?$ index.php [L]
+RewriteRule ^(contact|book-a-call)/?$ index.php [L]
 RewriteCond %{QUERY_STRING} (^|&)legacy=1(&|$)
-RewriteRule ^contact/?$ index.php [L]
+RewriteRule ^(contact|book-a-call)/?$ index.php [L]
 
 # 2) React pages (prerendered HTML files)
-RewriteRule ^(portfolio|about-us|contact|privacy-policy|terms-condition)/?$ $1.html [L]
+RewriteRule ^(portfolio|about-us|contact|privacy-policy|terms-condition|book-a-call)/?$ $1.html [L]
+
+# 2b) New enquiry admin (replaces the old Yii admin panel)
+RewriteRule ^admin(/.*)?$ admin.html [L]
 
 # 3) Real files and folders (css, images, media, react-assets …) are served directly
 RewriteCond %{REQUEST_FILENAME} -f [OR]

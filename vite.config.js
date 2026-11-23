@@ -7,12 +7,16 @@ export default defineConfig({
   plugins: [react()],
   build: {
     assetsDir: 'react-assets',
+    rollupOptions: {
+      input: { main: 'index.html', book: 'book-a-call.html', admin: 'admin.html' },
+    },
   },
   server: {
     // during `npm run dev`, load the original CSS/images from the live site
     proxy: {
       '/themes': { target: 'https://chatturai.com', changeOrigin: true },
       '/media': { target: 'https://chatturai.com', changeOrigin: true },
+      '/api': { target: 'http://localhost:3000' },
     },
   },
 });
