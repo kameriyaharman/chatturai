@@ -38,7 +38,7 @@ const TABS = [
 export default function Portfolio2() {
   const [tab, setTab] = useState('films');
   const [open, setOpen] = useState(null);
-  const [, label, items, fmt] = TABS.find((t) => t[0] === tab);
+  const [, , items, fmt] = TABS.find((t) => t[0] === tab);
   const vertical = tab === 'reels';
 
   return (
@@ -73,7 +73,7 @@ export default function Portfolio2() {
               onClick={() => setOpen({ id, title })} aria-label={`Play ${title}`}>
               <img src={thumb(id, vertical)} alt="" loading="lazy" decoding="async" />
               <span className="cap">
-                <span><b>{title}</b><small>{label} · {fmt}</small></span>
+                <span><b>{title}</b><small>{fmt}</small></span>
                 <span className="pp" aria-hidden="true"></span>
               </span>
             </button>
