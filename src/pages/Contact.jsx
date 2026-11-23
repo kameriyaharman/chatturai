@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { COUNTRIES, flag, guessCountry } from '../countries';
 import { CALENDLY } from '../components/Bits';
 import { saveEnquiry } from '../api';
+import { Lines } from '../components/Chrome2';
 
 /*
  * The form is still handled by the existing PHP (Yii) backend, exactly as before:
@@ -85,7 +86,7 @@ async function submitToYii(values) {
   return { ok: false, message: 'Something went wrong. Please try again, or email contact@chatturai.com.' };
 }
 
-function Field({ name, id, placeholder, type = 'text', textarea, values, errors, touched, onChange, onBlur, extra }) {
+function Field({ name, id, label, hint, placeholder, type = 'text', textarea, values, errors, touched, onChange, onBlur, extra, bare }) {
   const err = errors[name];
   const state = touched[name] ? (err ? ' is-invalid' : ' is-valid') : '';
   const common = {
@@ -97,12 +98,15 @@ function Field({ name, id, placeholder, type = 'text', textarea, values, errors,
     onBlur: () => onBlur(name),
     ...extra,
   };
-  const container = name === 'phone_number' ? 'field-fPhone' : `field-contact-${name}`;
+  const input = textarea
+    ? <textarea className={`inp${state}`} rows="5" {...common}></textarea>
+    : <input type={type} className={`inp${state}`} {...common} />;
+  if (bare) return <div>{input}<div className="invalid-feedback">{err || ''}</div></div>;
   return (
-    <div className={`mb-3 ${container} required`}>
-      {textarea
-        ? <textarea className={`text-area w-input${state}`} rows="5" {...common}></textarea>
-        : <input type={type} className={`text-field w-input${state}`} {...common} />}
+    <div className="fld">
+      <label htmlFor={id}>{label}<span className="req">*</span></label>
+      {hint && <div className="hint">{hint}</div>}
+      {input}
       <div className="invalid-feedback">{err || ''}</div>
     </div>
   );
@@ -186,77 +190,58 @@ export default function Contact() {
   const fp = { values, errors, touched, onChange, onBlur };
 
   return (
-    <>
-      <style type="text/css">{`
-  .invalid-feedback {
-    color: #d81515;
-}
-`}</style>
-      <header className="grain">
-        <div className="wrap rel">
-          <h1 className="dsp">Talk to us.</h1>
-          <p className="lede">Whatever stage it is at. A concept, a script, a rough thought you have not written down yet. Tell us what you are trying to make and we will come back with an honest answer on what it takes.</p>
+    <main className="shell contact2">
+      <div className="side">
+        <Lines as="h1" lines={['Talk', 'to us.']} />
+        <p data-r="">Whatever stage it is at. A concept, a script, a rough thought you have not written down yet. Tell us what you are trying to make and we will come back with an honest answer on what it takes.</p>
+        <div className="contact-ways" data-r="" style={{ '--i': 1 }}>
+          <a href="mailto:contact@chatturai.com"><span>contact@chatturai.com</span><small>Email</small></a>
+          <a href={CALENDLY} target="_blank" rel="noopener"><span>Book a 20 minute call</span><small>If you already know what you want made</small></a>
         </div>
-      </header>
-      <section>
-        <div className="wrap">
-          <form id="contactForm" className="contact-form" action="/contact" method="post" onSubmit={onSubmit} noValidate style={sent ? { display: 'none' } : undefined}>
-            <div className="q" data-q="name">
-              <label htmlFor="fName">Your name <span className="req">*</span></label>
-              <Field name="full_name" id="contact-full_name" placeholder="Full Name*" {...fp} />
-              <div className="err">We need a name to reply to.</div>
+      </div>
+
+      <div className="formcard" data-r="scale" style={{ '--i': 1 }}>
+        {sent ? (
+          <div className="sent2" id="sent">
+            <div className="tick">✓</div>
+            <h2>Thanks. It's with us.</h2>
+            <p>We read every message ourselves and come back within a working day, usually with a question or two before anything else.</p>
+            <p style={{ marginTop: 28 }}><Link className="btn btn-lime" to="/portfolio">See the work while you wait</Link></p>
+          </div>
+        ) : (
+          <form id="contactForm" action="/contact" method="post" onSubmit={onSubmit} noValidate>
+            <div className="two-f">
+              <Field name="full_name" id="contact-full_name" label="Your name" placeholder="Full name" {...fp} extra={{ autoComplete: 'name' }} />
+              <Field name="email" id="contact-email" label="Email" placeholder="you@company.com" {...fp} extra={{ autoComplete: 'email', inputMode: 'email' }} />
             </div>
-            <div className="q" data-q="email">
-              <label htmlFor="fEmail">Email <span className="req">*</span></label>
-              <div className="hint">Work or personal, whichever you actually read.</div>
-              <Field name="email" id="contact-email" placeholder="Email*" {...fp} />
-              <div className="err">Please enter a working email address.</div>
-            </div>
-            <div className="q" data-q="phone">
-              <label htmlFor="fPhone">Phone number <span className="req">*</span></label>
+            <div className="fld">
+              <label htmlFor="fPhone">Phone number<span className="req">*</span></label>
               <div className="hint">We only use it if email goes nowhere.</div>
-              <div className="phone">
-                <div className="dialbox">
-                  <span className="dialview" id="dialView">{flag(iso)}{'  '}{dial}</span>
-                  <svg className="chev" width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="#8C877D" strokeWidth="1.6" fill="none" strokeLinecap="round" /></svg>
+              <div className="phone2">
+                <div className="dial2">
+                  <span id="dialView">{flag(iso)}{' '}{dial}</span>
+                  <svg width="10" height="6" viewBox="0 0 10 6" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="#9C978D" strokeWidth="1.6" fill="none" strokeLinecap="round" /></svg>
                   <select id="fDial" name="Contact[country_code]" aria-label="Country code" value={dial} onChange={onDial}>
                     {COUNTRIES.map(([i, code, name]) => (
                       <option key={i} value={'+' + code} data-iso={i}>{flag(i)}{'  '}{name}{'  +'}{code}</option>
                     ))}
                   </select>
                 </div>
-                <Field name="phone_number" id="fPhone" placeholder="Phone Number*" {...fp} extra={{ autoComplete: 'tel', inputMode: 'numeric' }} />
+                <Field bare name="phone_number" id="fPhone" placeholder="Phone number" {...fp} extra={{ autoComplete: 'tel', inputMode: 'numeric' }} />
               </div>
-              <div className="err">Please enter a valid phone number.</div>
             </div>
-            <div className="q" data-q="message">
-              <label htmlFor="fMessage">Subject <span className="req">*</span></label>
-              <Field name="subject" id="contact-subject" placeholder="Subject*" {...fp} />
-            </div>
-            <div className="q" data-q="message">
-              <label htmlFor="fMessage">What are you trying to make? <span className="req">*</span></label>
-              <div className="hint">In as much or as little detail as you like. What it is for, who is going to watch it, and roughly when you need it. If you already have something written, say so and we will ask for it.</div>
-              <Field name="message" id="contact-message" placeholder="Write your message here...*" textarea {...fp} />
-              <div className="err">Tell us a little about what you have in mind.</div>
-            </div>
-            <div className="actions">
-              <button type="submit" className="cta" id="send" disabled={busy}>{busy ? 'Sending…' : <>Send <span className="dot">→</span></>}</button>
-              <span className="note">We read everything and reply within a working day.</span>
-            </div>
-            {formError && <div className="invalid-feedback" role="alert">{formError}</div>}
-            <div className="alt">
-              <b>Already know what you want made?</b>
-              <p>If you have a concept ready and you would rather talk it through, <a href={CALENDLY} target="_blank" rel="noopener">book a twenty minute call</a> instead. You bring the concept, we tell you what it takes to build and what it costs.</p>
+            <Field name="subject" id="contact-subject" label="Subject" placeholder="Brand film, feature, trailer…" {...fp} />
+            <Field name="message" id="contact-message" label="What are you trying to make?" textarea
+              hint="What it is for, who is going to watch it, and roughly when you need it. If you already have something written, say so."
+              placeholder="Tell us about the film…" {...fp} />
+            {formError && <div className="invalid-feedback" role="alert" style={{ marginBottom: 16 }}>{formError}</div>}
+            <div className="form-foot">
+              <button type="submit" className="btn btn-lime" id="send" disabled={busy}>{busy ? 'Sending…' : 'Send message'}</button>
+              <span>We read everything and reply within a working day.</span>
             </div>
           </form>
-          <div className={sent ? 'sent on' : 'sent'} id="sent">
-            <div className="tick">✓</div>
-            <h2 className="dsp">Thanks. It's with us.</h2>
-            <p>We read every message ourselves and come back within a working day, usually with a question or two before anything else.</p>
-            <p className="u-co1"><Link className="u-co2" to="/portfolio">See the work while you wait →</Link></p>
-          </div>
-        </div>
-      </section>
-    </>
+        )}
+      </div>
+    </main>
   );
 }

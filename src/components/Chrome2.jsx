@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { CALENDLY } from './Bits';
 
@@ -52,8 +52,13 @@ export function Footer2() {
   return (
     <>
       <section className="band">
+        <div className="band-marquee" aria-hidden="true">
+          <div>{[0, 1].map((k) => (
+            <span key={k}><span>Brand films</span><span>Feature films</span><span>Trailers</span><span>Reels</span><span>Concept development</span><span>Brand films</span><span>Feature films</span><span>Trailers</span><span>Reels</span><span>Concept development</span></span>
+          ))}</div>
+        </div>
         <div className="shell">
-          <h2 className="title">Tell us the idea. We build everything after it.</h2>
+          <Lines as="h2" className="title" lines={['Tell us the idea.', 'We build everything', 'after it.']} />
           <div className="band-row">
             <p>Whatever stage it is at, a concept, a script or a rough thought. Write to <a className="mail" href="mailto:contact@chatturai.com">contact@chatturai.com</a> or start here.</p>
             <div className="btns">
@@ -79,5 +84,58 @@ export function Footer2() {
         </div>
       </footer>
     </>
+  );
+}
+
+/* Headline that rises in line by line when scrolled into view */
+export function Lines({ as: Tag = 'h2', lines, className = 'title', style }) {
+  return (
+    <Tag className={className} style={style} data-r="lines">
+      {lines.map((l, i) => <span className="ln" key={i} style={{ '--l': i }}><span>{l}</span></span>)}
+    </Tag>
+  );
+}
+
+/* Count up to a number when it scrolls into view */
+export function CountUp({ to, suffix = '' }) {
+  const el = useRef(null);
+  const [n, setN] = useState(to);
+  useEffect(() => {
+    const node = el.current;
+    if (!node || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    setN(0);
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      const start = performance.now(); const dur = 1600;
+      const tick = (t) => {
+        const p = Math.min(1, (t - start) / dur);
+        setN(Math.round(to * (1 - Math.pow(1 - p, 3))));
+        if (p < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }, { threshold: 0.4 });
+    io.observe(node);
+    return () => io.disconnect();
+  }, [to]);
+  return <b ref={el} className="tnum">{n}{suffix}</b>;
+}
+
+/* Full-screen video player */
+export function VideoModal({ src, title, vertical, onClose }) {
+  useEffect(() => {
+    const k = (e) => e.key === 'Escape' && onClose();
+    document.addEventListener('keydown', k);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => { document.removeEventListener('keydown', k); document.body.style.overflow = prev; };
+  }, [onClose]);
+  return (
+    <div className="modal" role="dialog" aria-modal="true" aria-label={title} onClick={(e) => e.target === e.currentTarget && onClose()}>
+      <button className="modal-x" onClick={onClose} aria-label="Close video">✕</button>
+      <div className={vertical ? 'modal-frame v' : 'modal-frame'}>
+        <iframe src={src} title={title} allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>
+      </div>
+    </div>
   );
 }

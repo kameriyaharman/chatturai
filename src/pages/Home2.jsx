@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CALENDLY, TEAM } from '../components/Bits';
+import { Lines } from '../components/Chrome2';
 
 const REEL_ID = 'BSLUOz3mUM3EUbX22Zbf00mZBKC029cZBhPVbZsIAavCY';
 const HERO_SRC = `https://player.mux.com/${REEL_ID}?metadata-video-title=showreel&video-title=showreel&autoplay=true&muted=true&loop=true&controls=false`;
@@ -78,7 +79,7 @@ function Hero() {
         <div className="modal" role="dialog" aria-modal="true" aria-label="Showreel" onClick={(e) => e.target === e.currentTarget && setReel(false)}>
           <button className="modal-x" onClick={() => setReel(false)} aria-label="Close showreel">✕</button>
           <div className="modal-frame">
-            <iframe src={REEL_FULL} title="ChatturAi showreel" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowFullScreen></iframe>
+            <iframe src={REEL_FULL} title="ChatturAi showreel" allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>
           </div>
         </div>
       )}
@@ -105,11 +106,11 @@ function Work() {
     <section className="sec" id="work">
       <div className="shell">
         <div className="sec-head">
-          <h2 className="title">Selected work</h2>
-          <p>Brand films, feature trailers and reels. Every one of them started as words in a document.</p>
+          <Lines lines={['Selected', 'work']} />
+          <p data-r="">Brand films, feature trailers and reels. Every one of them started as words in a document.</p>
         </div>
         <div className="viewer">
-          <div className="viewer-list">
+          <div className="viewer-list" data-r="">
             {FILMS.map((x, i) => (
               <button key={x.title} type="button" className={i === active ? 'vi on' : 'vi'} onMouseEnter={() => pick(i)} onFocus={() => pick(i)} onClick={() => pick(i)} aria-pressed={i === active}>
                 <h3>{x.title}</h3>
@@ -118,7 +119,7 @@ function Work() {
               </button>
             ))}
           </div>
-          <div className="viewer-stage">
+          <div className="viewer-stage" data-r="scale" style={{ '--i': 1 }}>
             {FILMS.map((x, i) => <img key={x.title} src={x.img} alt="" className={i === active ? 'on' : ''} loading={i ? 'lazy' : undefined} />)}
             {playing === active ? (
               <iframe src={f.src} title={f.title} allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowFullScreen></iframe>
@@ -129,7 +130,7 @@ function Work() {
             )}
           </div>
         </div>
-        <div className="viewer-foot">
+        <div className="viewer-foot" data-r="">
           <Link className="btn btn-ghost" to="/portfolio">See all 18 films</Link>
           <span>Brand films, feature trailers and reels</span>
         </div>
@@ -142,22 +143,22 @@ function Craft() {
   return (
     <section className="sec craft" id="craft">
       <div className="shell">
-        <h2 className="title">Made with AI.<span>Not by AI.</span></h2>
+        <Lines lines={['Made with AI.', 'Not by AI.']} />
         <div className="timeline" role="img" aria-label="Twelve crafts on an edit timeline. Generation is the only one the tools do.">
           <div className="ruler" aria-hidden="true">
             {CRAFTS.map((_, i) => <span key={i} className="tnum">{`00:${String(i * 5).padStart(2, '0')}`}</span>)}
           </div>
           <div className="track">
             <div className="playhead" aria-hidden="true"></div>
-            {CRAFTS.map((c) => <div key={c} className={c === 'Generation' ? 'clip ai' : 'clip'}>{c}</div>)}
+            {CRAFTS.map((c, i) => <div key={c} className={c === 'Generation' ? 'clip ai' : 'clip'} style={{ '--c': i }}>{c}</div>)}
           </div>
           <div className="track-label"><span>Twelve crafts go into every film</span><b>The tools do one</b></div>
         </div>
         <div className="cols">
-          <div className="copy">
+          <div className="copy" data-r="">
             <p>People do the other eleven. Character consistency and world consistency are where almost every AI video falls apart: a face that shifts between shots, a jacket that changes colour, a room that isn't the same room. Holding those still is the work.</p>
           </div>
-          <div className="copy">
+          <div className="copy" data-r="" style={{ '--i': 1 }}>
             <p>What disappeared was the trucks, the crew, the locations and the six week schedule. What did not disappear was the treatment, the shot design, the grade, the mix and the score.</p>
             <p><strong>You describe the place. We build it.</strong> Nothing is shot by you, and nothing needs to exist before we start.</p>
           </div>
@@ -172,7 +173,7 @@ function Voice() {
   return (
     <section className="sec">
       <div className="shell">
-        <div className="voice">
+        <div className="voice" data-r="scale">
           <img src="/media/img/testimonials.png" alt="" loading="lazy" />
           <div className="voice-shade"></div>
           {play && <iframe src="https://player.mux.com/SjU4vrR02H1fMBVEWqxvbCPF02qlXJMYfD3kZi8vk2vt4?metadata-video-title=1&video-title=1&thumbnail-time=2&autoplay=true" title="Client testimonial" allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture" allowFullScreen></iframe>}
@@ -195,12 +196,12 @@ function Pricing() {
     <section className="sec paper">
       <div className="shell">
         <div className="sec-head">
-          <h2 className="title">What we take on</h2>
-          <p>Starting prices, not fixed prices. Your exact quote comes on the call, after we read your script.</p>
+          <Lines lines={['What we', 'take on']} />
+          <p data-r="">Starting prices, not fixed prices. Your exact quote comes on the call, after we read your script.</p>
         </div>
         <div className="plans">
-          {PLANS.map((p) => (
-            <div key={p.name} className={p.hot ? 'plan hot' : 'plan'}>
+          {PLANS.map((p, i) => (
+            <div key={p.name} className={p.hot ? 'plan hot' : 'plan'} data-r="" style={{ '--i': i }}>
               <h3>{p.name}</h3>
               <span className="from">Starts from</span>
               <div className="price tnum">{p.price}</div>
@@ -209,7 +210,7 @@ function Pricing() {
             </div>
           ))}
         </div>
-        <div className="plans-note">
+        <div className="plans-note" data-r="">
           <p>Complexity decides the number, not duration. One character in one world is straightforward. Three characters across four eras, each recognisable in every shot, is a different order of work.</p>
           <a className="link" href={CALENDLY} target="_blank" rel="noopener">Book a 20 minute call</a>
         </div>
@@ -223,8 +224,8 @@ function Studio() {
     <section className="sec" id="studio">
       <div className="shell">
         <div className="studio-row">
-          <h2 className="title" style={{ fontSize: 'clamp(58px,8vw,128px)' }}>The studio</h2>
-          <div>
+          <Lines lines={['The', 'studio']} style={{ fontSize: 'clamp(58px,8vw,128px)' }} />
+          <div data-r="">
             <p className="lead">A small film studio. Ten people making cinematic brand films and full feature films, with AI as one tool inside a normal film process.</p>
             <div className="copy">
               <p>Founders kept showing us concepts they had written and could not afford to make. The idea was already good. What was missing was a crew, so we built one that works differently.</p>
@@ -232,14 +233,14 @@ function Studio() {
           </div>
         </div>
         <div className="team3">
-          {TEAM.map(([file, name, role]) => (
-            <figure className="person" key={name}>
+          {TEAM.map(([file, name, role], i) => (
+            <figure className="person" key={name} data-r="scale" style={{ '--i': i }}>
               <img src={`https://chatturai.com/media/team/${file}`} alt={name} loading="lazy" />
               <figcaption><b>{name}</b><span>{role}</span></figcaption>
             </figure>
           ))}
         </div>
-        <div className="viewer-foot">
+        <div className="viewer-foot" data-r="">
           <Link className="btn btn-ghost" to="/about-us">More about the studio</Link>
         </div>
       </div>

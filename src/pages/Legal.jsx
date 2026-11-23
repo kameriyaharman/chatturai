@@ -1,15 +1,17 @@
 import { Link } from 'react-router-dom';
+import { Lines } from '../components/Chrome2';
 
 const Mail = () => <a href="mailto:contact@chatturai.com">contact@chatturai.com</a>;
 
 function LegalHead({ title, intro }) {
   return (
-    <header className="head grain">
-      <div className="wrap rel">
-        <div className="eyebrow">Legal</div>
-        <h1 className="dsp">{title}</h1>
-        <p className="intro">{intro}</p>
-        <p className="updated">Last updated 9 August 2026</p>
+    <header className="phero">
+      <div className="shell">
+        <Lines as="h1" lines={title} style={{ fontSize: 'clamp(64px,9vw,150px)' }} />
+        <div className="phero-row">
+          <p data-r="">{intro}</p>
+          <span className="updated" data-r="" style={{ '--i': 1 }}>Last updated 9 August 2026</span>
+        </div>
       </div>
     </header>
   );
@@ -19,11 +21,11 @@ export function Privacy() {
   return (
     <>
       <LegalHead
-        title={<>Privacy<br />Policy</>}
+        title={['Privacy', 'policy']}
         intro="Chatturai Productions Private Limited respects your privacy and is committed to protecting your personal data. This policy explains how we collect, use, and safeguard your information when you visit our website, interact with our ads, or engage our services."
       />
-      <section>
-        <div className="wrap doc">
+      <section className="shell">
+        <div className="doc2" data-r="fade">
           <h2>1. Information we collect</h2>
           <p>We may collect the following types of information.</p>
           <ul>
@@ -66,11 +68,11 @@ export function Terms() {
   return (
     <>
       <LegalHead
-        title={<>Terms and<br />Conditions</>}
+        title={['Terms and', 'conditions']}
         intro="Welcome to Chatturai Productions Private Limited. These Terms govern your use of our website, our services, and our SMS and messaging communications. By using our website, engaging our services, or opting in to receive messages from us, you agree to these Terms."
       />
-      <section>
-        <div className="wrap doc">
+      <section className="shell">
+        <div className="doc2" data-r="fade">
           <h2>1. About us</h2>
           <p>Chatturai is an AI-first film studio that produces cinematic, emotional brand films and marketing videos for businesses. We provide creative production services to clients worldwide.</p>
           <h2>2. Use of our website</h2>
