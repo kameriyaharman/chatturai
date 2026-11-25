@@ -6,6 +6,11 @@ export const PAGES = {
     description:
       'ChatturAI crafts high-impact AI ads, video campaigns, and brand storytelling. From idea to implementation—AI ad videos, creative strategy, and cinematic content that converts.',
   },
+  '/home-5': {
+    body: 'v5', noindex: true,
+    title: "ChatturAI — Version 5 · Script to Screen",
+    description: 'Home page design option for ChatturAi.',
+  },
   '/home-1': {
     body: 'v2 light', noindex: true,
     title: "ChatturAI — Version 1 · Editorial",

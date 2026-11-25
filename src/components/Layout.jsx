@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { pageFor } from '../seo';
 import { Nav2, Footer2 } from './Chrome2';
+import { Nav5, End5 } from './Chrome5';
 
 /* Page plumbing: body class, title, scroll reset, pixel, scroll reveals, hero parallax */
 function usePageEffects() {
@@ -46,6 +47,16 @@ function usePageEffects() {
 
 export default function Layout() {
   usePageEffects();
+  const { pathname } = useLocation();
+  if (pageFor(pathname).body.includes('v5')) {
+    return (
+      <>
+        <Nav5 />
+        <Outlet />
+        <End5 />
+      </>
+    );
+  }
   return (
     <>
       <Nav2 />

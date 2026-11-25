@@ -6,6 +6,7 @@ import HomeB from './pages/HomeB';
 import HomeC from './pages/HomeC';
 import HomeD from './pages/HomeD';
 import Versions from './pages/Versions';
+import Home5 from './pages/Home5';
 import Portfolio2 from './pages/Portfolio2';
 import About2 from './pages/About2';
 import Contact from './pages/Contact';
@@ -16,6 +17,7 @@ export default function App() {
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<Home2 />} />
+        <Route path="home-5" element={<Home5 />} />
         <Route path="home-1" element={<HomeA />} />
         <Route path="home-2" element={<HomeB />} />
         <Route path="home-3" element={<HomeC />} />
