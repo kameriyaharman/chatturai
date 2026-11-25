@@ -11,7 +11,7 @@ import { handleApi } from './api.mjs';
 const ORIGIN = process.env.LEGACY_ORIGIN || 'https://chatturai.com';
 const PORT = process.env.PORT || 3000;
 const DIST = path.join(path.dirname(fileURLToPath(import.meta.url)), 'dist');
-const ROUTES = new Set(['/portfolio', '/about-us', '/contact', '/privacy-policy', '/terms-condition']);
+const ROUTES = new Set(['/home-1', '/home-2', '/home-3', '/home-4', '/versions', '/portfolio', '/about-us', '/contact', '/privacy-policy', '/terms-condition']);
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.webp': 'image/webp', '.json': 'application/json' };
 
 function sendFile(res, file, status = 200) {

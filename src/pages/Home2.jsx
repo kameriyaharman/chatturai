@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { CALENDLY, TEAM } from '../components/Bits';
 import { Lines } from '../components/Chrome2';
 
-const REEL_ID = 'BSLUOz3mUM3EUbX22Zbf00mZBKC029cZBhPVbZsIAavCY';
-const HERO_SRC = `https://player.mux.com/${REEL_ID}?metadata-video-title=showreel&video-title=showreel&autoplay=true&muted=true&loop=true&controls=false`;
-const REEL_FULL = `https://player.mux.com/${REEL_ID}?metadata-video-title=showreel&video-title=showreel&autoplay=true`;
-const HERO_POSTER = `https://image.mux.com/${REEL_ID}/thumbnail.webp?time=0&width=1920`;
+export const REEL_ID = 'BSLUOz3mUM3EUbX22Zbf00mZBKC029cZBhPVbZsIAavCY';
+export const HERO_SRC = `https://player.mux.com/${REEL_ID}?metadata-video-title=showreel&video-title=showreel&autoplay=true&muted=true&loop=true&controls=false`;
+export const REEL_FULL = `https://player.mux.com/${REEL_ID}?metadata-video-title=showreel&video-title=showreel&autoplay=true`;
+export const HERO_POSTER = `https://image.mux.com/${REEL_ID}/thumbnail.webp?time=0&width=1920`;
 
-const FILMS = [
+export const FILMS = [
   { title: 'The Promise', kind: 'Brand film', img: '/media/img/decath_promise.png',
     src: 'https://player.mux.com/9ePbcwpZJGkcscFAVV8EB01fx3aHY8wR01ExJvtYpqiMs?metadata-video-title=The%20Promise&video-title=The%20Promise&autoplay=true',
     note: 'An emotionally heavy ascent up a treacherous snowy peak. The hardest part was keeping harsh snow dynamics and raw facial expressions consistent from shot to shot.' },
@@ -21,14 +21,14 @@ const FILMS = [
 ];
 
 // light 480px stills straight from Mux (the 1920px posters are too heavy for a moving strip)
-const STRIP = ['u021AiWSBoeL02Do5Cv8dNRcs02dC7j101yj2KAxZrb5TKU', 'jGTKWk00JGBet6qSDJ6BwHS01l00zA8M01jJL9smzjfVmI8', 'YMnBV2OstLZ01MFv0201b8fjKQ7hvIIKX8V1Ka7l00Fbqzg',
+export const STRIP = ['u021AiWSBoeL02Do5Cv8dNRcs02dC7j101yj2KAxZrb5TKU', 'jGTKWk00JGBet6qSDJ6BwHS01l00zA8M01jJL9smzjfVmI8', 'YMnBV2OstLZ01MFv0201b8fjKQ7hvIIKX8V1Ka7l00Fbqzg',
   'eALIA4MM2LVTUiSSU98MZscPR9nnILLoEh8uM02Gw00J00', '9ePbcwpZJGkcscFAVV8EB01fx3aHY8wR01ExJvtYpqiMs', 'vYqkS01I6rmWIqtywzeqj5AYkHZlyg00XrY8GSrd4nnCg',
   'dwPEyzO01d2gApJEPvQWZtvUt02HvFfDwNCcpYz9WsMSs', 'nNq5wLb00Kb9ihFatUZRG2T02LkAiwf3deENHgo1x8vmA', 'HFjXqbrP00hCuGUnHnIPMV79aCmyKHDJZgg5901uFM8y8',
   'ofEPmGoMkbhcdRQi1502uT1QF6QphjLPs9j4d8SZlNXA', 'meomhCyllhtuY3xZadHeu7TXu02CpN3vGI4PBPpuKtiw', 'vzEz2d7m02Dlc6EKZhAbXGvgzCRUvAmR00rwJEwFzZU02E',
   '00V1pk5xxmR502aHfIqVmXWl4hJBMKqMVbri01N3MuATaE', '3b01KEOgIT5dHTFIWw7sbwbuVh8Xow3smVUMFaT4KeXY',
 ].map((id) => `https://image.mux.com/${id}/thumbnail.webp?width=480&height=270&fit_mode=smartcrop&time=6`);
-const CRAFTS = ['Treatment', 'Shot design', 'Storyboard', 'Character', 'World', 'Cinemato­graphy', 'Generation', 'Edit', 'Colour', 'Sound', 'Score', 'Voice'];
-const PLANS = [
+export const CRAFTS = ['Treatment', 'Shot design', 'Storyboard', 'Character', 'World', 'Cinemato­graphy', 'Generation', 'Edit', 'Colour', 'Sound', 'Score', 'Voice'];
+export const PLANS = [
   { name: 'Brand films', price: '$3,000', items: ['1 to 3 minutes', 'Delivered in 15 days', 'Two revision rounds built in'], hot: true },
   { name: 'Feature films', price: '$30,000', items: ['60 to 90 minutes', 'Timelines in months', 'Original score and world building'] },
   { name: 'Concept development', price: '$750', items: ['A 1 to 3 minute script', 'Treatment and shot design', 'Credited against the film'] },
@@ -87,7 +87,7 @@ function Hero() {
   );
 }
 
-function Filmstrip() {
+export function Filmstrip() {
   return (
     <div className="strip" aria-hidden="true">
       <div className="strip-track">
@@ -139,7 +139,7 @@ function Work() {
   );
 }
 
-function Craft() {
+export function Craft() {
   return (
     <section className="sec craft" id="craft">
       <div className="shell">
@@ -168,7 +168,7 @@ function Craft() {
   );
 }
 
-function Voice() {
+export function Voice() {
   const [play, setPlay] = useState(false);
   return (
     <section className="sec">
@@ -191,7 +191,7 @@ function Voice() {
   );
 }
 
-function Pricing() {
+export function Pricing() {
   return (
     <section className="sec paper">
       <div className="shell">
@@ -219,7 +219,7 @@ function Pricing() {
   );
 }
 
-function Studio() {
+export function Studio() {
   return (
     <section className="sec" id="studio">
       <div className="shell">

@@ -6,6 +6,31 @@ export const PAGES = {
     description:
       'ChatturAI crafts high-impact AI ads, video campaigns, and brand storytelling. From idea to implementation—AI ad videos, creative strategy, and cinematic content that converts.',
   },
+  '/home-1': {
+    body: 'v2 light', noindex: true,
+    title: "ChatturAI — Version 1 · Editorial",
+    description: 'Home page design option for ChatturAi.',
+  },
+  '/home-2': {
+    body: 'v2', noindex: true,
+    title: "ChatturAI — Version 2 · Kinetic",
+    description: 'Home page design option for ChatturAi.',
+  },
+  '/home-3': {
+    body: 'v2', noindex: true,
+    title: "ChatturAI — Version 3 · Bento",
+    description: 'Home page design option for ChatturAi.',
+  },
+  '/home-4': {
+    body: 'v2', noindex: true,
+    title: "ChatturAI — Version 4 · Director's Cut",
+    description: 'Home page design option for ChatturAi.',
+  },
+  '/versions': {
+    body: 'v2', noindex: true,
+    title: "ChatturAI — Pick a home page",
+    description: 'Home page design option for ChatturAi.',
+  },
   '/portfolio': {
     body: 'v2',
     title: 'ChatturAI - AI Film Portfolio | Cinematic Work by ChatturAi',

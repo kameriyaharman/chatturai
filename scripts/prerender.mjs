@@ -15,7 +15,8 @@ for (const [url, page] of Object.entries(PAGES)) {
     .replace('<!--app-html-->', render(url))
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(page.title)}</title>`)
     .replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${esc(page.description)}" />`)
-    .replace('<body class="p-home">', `<body class="${page.body}">`);
+    .replace('<body class="p-home">', `<body class="${page.body}">`)
+    .replace('content="index,follow,max-image-preview:large"', page.noindex ? 'content="noindex,nofollow"' : 'content="index,follow,max-image-preview:large"');
   const file = url === '/' ? 'index.html' : `${url.slice(1)}.html`;
   fs.writeFileSync(path.join(dist, file), html);
   console.log('prerendered', url, '->', file);
